@@ -1,85 +1,127 @@
+// 문제 1번 입니다
 #include <stdio.h>
 
-#define _CRT_SECURE_NO_WARNINGS
-#define MAX(a,b) (((a)>(b))?(a):(b))
-#define MAX_DEGREE 101
+#define MAX_DEGREE 100
 
+// 다항식을 표현하는 구조체 정의
 typedef struct {
-	int degree;
-	float coef[MAX_DEGREE];
-}polynomial;
+    int degree;         // 다항식의 차수
+    float coef[MAX_DEGREE]; // 각 항의 계수를 저장하는 배열
+} polynomial;
 
-polynomial poly_add1(polynomial A, polynomial B) {
-	polynomial C;
-	int Apos = 0, Bpos = 0, Cpos = 0;
-	int degree_a = A.degree;
-	int degree_b = B.degree;
-	C.degree = MAX(A.degree, B.degree);
+// 다항식의 곱셈을 계산하는 함수
+polynomial mult(polynomial A, polynomial B);
 
-	while (Apos <= A.degree && Bpos <= B.degree) {
-		if (degree_a > degree_b) {
-			printf("%d차항 : C.coef[%d] = A.coef[%d] = %d \n", degree_a, Cpos, Apos, (int)A.coef[Apos]);
-			C.coef[Cpos++] = A.coef[Apos++];
-			degree_a--;
-		}
-		else if (degree_a == degree_b) {
-			printf("%d차항 : C.coef[%d] = A.coef[%d] + B.coef[%d] = %d \n", degree_a, Cpos, Apos, Bpos, (int)(A.coef[Apos] + B.coef[Bpos]));
-			C.coef[Cpos++] = A.coef[Apos++] + B.coef[Bpos++];
-			degree_a--; degree_b--;
-		}
-		else {
-			printf("%d차항 : C.coef[%d] = B.coef[%d] = %d \n", degree_b, Cpos, Bpos, (int)B.coef[Bpos]);
-			C.coef[Cpos++] = B.coef[Bpos++];
-			degree_b--;
-		}
-	}
-	return C;
+int main() {
+    polynomial a = { 3, {4,3,2,1} }; // 7x^6 + 5x^3 + 9x^2 + 1
+    polynomial b = { 2, {3,2,8} };       // 5x^3 + 2x^2 + x + 10
+    polynomial c;
+
+    // 다항식 곱셈 수행
+    c = mult(a, b);
+
+    // 결과 출력
+    printf("%d차 ", c.degree);
+    for (int i = 0; i < c.degree + 1; i++) {
+        if (c.coef[i] != 0) {
+            printf("%.1fx^%d ", c.coef[i], c.degree - i);
+            if (i < c.degree) {
+                printf("+ ");
+            }
+        }
+    }
+
+    printf("\n");
+
+    return 0;
 }
 
-void print_poly(polynomial p) {
-	for (int i = p.degree; i > 0; i--)
-		printf("%3.1f x^%d + ", p.coef[p.degree - i], i);
-	printf("%3.1f \n", p.coef[p.degree]);
+// 다항식의 곱셈을 계산하는 함수
+polynomial mult(polynomial A, polynomial B) {
+    polynomial C;
+    int i, j;
+
+    // 결과 다항식의 계수를 0으로 초기화
+    for (i = 0; i < A.degree + B.degree + 1; i++)
+        C.coef[i] = 0;
+    // 결과 다항식의 차수 설정
+    C.degree = A.degree + B.degree;
+
+    // 다항식 곱셈 수행
+    for (i = 0; i < A.degree + 1; i++)
+        for (j = 0; j < B.degree + 1; j++)
+            C.coef[i + j] += A.coef[i] * B.coef[j];
+
+    return C; // 결과 다항식 반환
 }
 
-int main(void) {
-	/*
-	polynomial a = { 5,{3,6,0,0,0,10} };
-	polynomial b = { 4,{7,0,5,0,1} };
-	polynomial c;
-	*/
 
-	// 직접 다항식 정보 입력 받기
+//---------------------------------------------------------------------------------------------------------
 
-	polynomial a, b, c;
-	printf("[첫번째 다항식 정보 입력]\n\n");
-	printf("최고차항의 차수 : ");
-	scanf("%d", &a.degree);
-	printf("순서대로 차항의 계수 입력 : ");
-	for (int i = 0; i <= a.degree; i++)
-		scanf("%f", &a.coef[i]);
 
-	printf("\n첫번째 다항식 : ");
-	print_poly(a);
 
-	printf("\n\n[두번째 다항식 정보 입력]\n\n");
-	printf("최고차항의 차수 : ");
-	scanf("%d", &b.degree);
-	printf("순서대로 차항의 계수 입력 : ");
-	for (int i = 0; i <= b.degree; i++)
-		scanf("%f", &b.coef[i]);
 
-	printf("\n두번째 다항식 : ");
-	print_poly(b);
-	printf("\n");
 
-	print_poly(a);
-	print_poly(b);
-	printf("\n");
 
-	c = poly_add1(a, b);
-	printf("----------------------------------------------------------\n");
-	print_poly(c);
 
-	return 0;
-}
+// 문제 2번 입니다.
+
+
+
+
+
+//#include <stdio.h>
+//
+//#define MAX_DEGREE 100
+//
+//// 다항식을 표현하는 구조체 정의
+//typedef struct {
+//    int degree;         // 다항식의 차수
+//    float coef[MAX_DEGREE]; // 각 항의 계수를 저장하는 배열
+//} polynomial;
+//
+//// 다항식의 곱셈을 계산하는 함수
+//polynomial mult(polynomial A, polynomial B);
+//
+//int main() {
+//    polynomial a = { 6, {7, 0, 0, 5, 9, 0, 1} }; // 7x^6 + 5x^3 + 9x^2 + 1
+//    polynomial b = { 3, {5, 2, 1, 10} };       // 5x^3 + 2x^2 + x + 10
+//    polynomial c;
+//
+//    // 다항식 곱셈 수행
+//    c = mult(a, b);
+//
+//    // 결과 출력
+//    printf("%d차 ", c.degree);
+//    for (int i = 0; i < c.degree + 1; i++) {
+//        if (c.coef[i] != 0) {
+//            printf("%.1fx^%d ", c.coef[i], c.degree - i);
+//            if (i < c.degree) {
+//                printf("+ ");
+//            }
+//        }
+//    }
+//
+//    printf("\n");
+//
+//    return 0;
+//}
+//
+//// 다항식의 곱셈을 계산하는 함수
+//polynomial mult(polynomial A, polynomial B) {
+//    polynomial C;
+//    int i, j;
+//
+//    // 결과 다항식의 계수를 0으로 초기화
+//    for (i = 0; i < A.degree + B.degree + 1; i++)
+//        C.coef[i] = 0;
+//    // 결과 다항식의 차수 설정
+//    C.degree = A.degree + B.degree;
+//
+//    // 다항식 곱셈 수행
+//    for (i = 0; i < A.degree + 1; i++)
+//        for (j = 0; j < B.degree + 1; j++)
+//            C.coef[i + j] += A.coef[i] * B.coef[j];
+//
+//    return C; // 결과 다항식 반환
+//}
