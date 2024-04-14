@@ -18,5 +18,14 @@
     <ClCompile Include="5907022_new.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="5907022_0328_1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="5907022_0408.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="5907022_0414_1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
