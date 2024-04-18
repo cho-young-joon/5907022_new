@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="5907022_0312_1.c" />
     <ClCompile Include="5907022_0314.c" />
-    <ClCompile Include="5907022_0417_1.cpp" />
+    <ClCompile Include="5907022_0417_1.c" />
     <ClCompile Include="5907022_new.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
