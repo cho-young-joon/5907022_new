@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+//과제
 // 노드 구조체 정의
 typedef struct Node {
     int data;
