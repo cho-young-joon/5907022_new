@@ -1,4 +1,4 @@
-//2024-06-10 과제 제출
+//2024-06-10 과제 제출 조영준
 #include <stdio.h>
 #include <stdlib.h>
 
